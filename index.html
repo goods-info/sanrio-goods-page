@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>クロミと推し活コスメ 商品まとめ</title>
+<script data-goatcounter="https://kuromi-oshikatsu.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<style>
+  body { font-family: sans-serif; background: #fff4c7; color: #4a3a28; margin: 0; padding: 24px 16px; }
+  h1 { text-align: center; font-size: 1.4rem; margin-bottom: 20px; color: #4a3a28; }
+  .search-wrap { max-width: 960px; margin: 0 auto 20px; }
+  #search-box {
+    width: 100%; box-sizing: border-box; padding: 10px 14px; font-size: 1rem;
+    border: 2px solid #f6d98a; border-radius: 999px; background: #fffdf5; color: #4a3a28;
+  }
+  #search-box:focus { outline: none; border-color: #f06292; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; max-width: 960px; margin: 0 auto; }
+  .card { background: #fffdf5; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; color: #4a3a28; box-shadow: 0 2px 8px rgba(74,58,40,0.12); }
+  /* .cardのdisplay:flexが[hidden]の既定スタイルより詳細度で勝ってしまい、検索で
+     絞り込んでも実際には非表示にならなかったため、明示的に上書きする。 */
+  .card[hidden] { display: none; }
+  .card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+  .card .body { padding: 8px 10px 12px; }
+  .card .name { font-size: 0.85rem; line-height: 1.3; margin: 0 0 4px; }
+  .card .category {
+    display: inline-block; max-width: 100%; font-size: 0.7rem; color: #a97a4a; background: #fff0c2;
+    border-radius: 999px; padding: 2px 8px; margin: 0 0 4px; white-space: nowrap; overflow: hidden;
+    text-overflow: ellipsis; box-sizing: border-box;
+  }
+  .card .price { font-size: 0.8rem; color: #f06292; font-weight: bold; margin: 0; }
+  .empty { text-align: center; opacity: 0.7; }
+  footer { text-align: center; margin-top: 32px; font-size: 0.75rem; opacity: 0.7; }
+</style>
+</head>
+<body>
+<h1>クロミと推し活コスメ 商品まとめ</h1>
+
+<div class="grid" id="product-grid">
+<p class="empty">まだ商品がありません。</p>
+</div>
+<p class="empty" id="no-results" hidden>該当する商品が見つかりませんでした。</p>
+<footer>#PR 本ページの一部のリンクはアフィリエイトプログラムによるものです</footer>
+<script>
+(function () {
+  var input = document.getElementById("search-box");
+  if (!input) return;
+  var cards = Array.prototype.slice.call(document.querySelectorAll("#product-grid .card"));
+  var noResults = document.getElementById("no-results");
+  input.addEventListener("input", function () {
+    var query = input.value.trim().toLowerCase();
+    var visibleCount = 0;
+    cards.forEach(function (card) {
+      var nameEl = card.querySelector(".name");
+      var text = (nameEl ? nameEl.textContent : "") + " " + (card.dataset.category || "");
+      var match = query === "" || text.toLowerCase().indexOf(query) !== -1;
+      card.hidden = !match;
+      if (match) visibleCount += 1;
+    });
+    if (noResults) noResults.hidden = visibleCount !== 0;
+  });
+})();
+</script>
+</body>
+</html>
