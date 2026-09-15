@@ -22,8 +22,11 @@
   .card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
   .card .body { padding: 8px 10px 12px; }
   .card .name { font-size: 0.85rem; line-height: 1.3; margin: 0 0 4px; }
+  /* 2026-09-15、運用者の指摘: 淡いラベンダー文字(#c8b9d2)+暗いパープル背景
+     (#2f2140)が、カード自体の背景(#241a30)とほぼ同化して見づらかった。
+     白文字+ビビッドパープル背景にして、はっきり視認できるバッジにする。 */
   .card .category {
-    display: inline-block; max-width: 100%; font-size: 0.7rem; color: #c8b9d2; background: #2f2140;
+    display: inline-block; max-width: 100%; font-size: 0.7rem; color: #ffffff; background: #7b2cbf;
     border-radius: 999px; padding: 2px 8px; margin: 0 0 4px; white-space: nowrap; overflow: hidden;
     text-overflow: ellipsis; box-sizing: border-box;
   }
